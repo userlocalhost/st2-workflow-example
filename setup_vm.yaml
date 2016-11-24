@@ -1,0 +1,32 @@
+---
+name: "setup_vm"
+description: "An example to automate VM setup operation"
+runner_type: "action-chain"
+enabled: true
+
+entry_point: "workflows/setup_vm.yaml"
+
+parameters:
+    name:
+        type: "string"
+        required: true
+
+    ipaddr:
+        type: "string"
+        default: ""
+
+    domain:
+        type: "string"
+        default: "dmm.local"
+
+    vcpu:
+        type: "integer"
+        default: 1
+
+    ram:
+        type: "integer"
+        default: 1 # [GB]
+
+    storage:
+        type: "integer"
+        default: 100 # [GB]
