@@ -4,36 +4,36 @@ chain:
     - name: create-vm
       ref: core.local
       parameters:
-          cmd: "echo '[create-vm] {{name}}'"
+          cmd: "/usr/local/bin/create-vm {{name}} {{ipaddr}} {{vcpu}} {{ram}} {{storage}}"
       on-success: provision-vm
 
     - name: provision-vm
       ref: core.local
       parameters:
-          cmd: "echo '[provision-vm] {{action_context}}'"
+          cmd: "/usr/local/bin/provision-vm {{ipaddr}} {{domain}}"
       on-success: register-dns
       on-failure: unregister-dns
 
     - name: register-dns
       ref: core.local
       parameters:
-          cmd: "echo '[register-dns] {{name}}'"
+          cmd: "/usr/local/bin/register-dns {{name}}"
       on-success: register-lb
       on-failure: unregister-dns
 
     - name: register-lb
       ref: core.local
       parameters:
-          cmd: "echo '[register-lb] {{name}}'"
+          cmd: "/usr/local/bin/register-lb {{name}}"
       on-failure: unregister-dns
 
     - name: unregister-dns
       ref: core.local
       parameters:
-          cmd: "echo '[unregister-dns] {{name}}'"
+          cmd: "/usr/local/bin/unregister-dns {{name}}"
       on-success: clear-vm
 
     - name: clear-vm
       ref: core.local
       parameters:
-          cmd: "echo '[clear-vm] {{name}}'"
+          cmd: "/usr/local/bin/clear-vm {{name}}"
